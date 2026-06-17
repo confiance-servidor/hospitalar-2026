@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard Hospitalar 2026 — Confiance Medical</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Raleway:wght@400;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:   #1F2C4E;
+      --blue:   #326A84;
+      --cyan:   #64C3D1;
+      --orange: #FFA300;
+      --grey:   #706F6F;
+      --teal:   #1E9DBA;
+      --ice:    #E6F9FC;
+      --soft:   #F4F6F9;
+      --white:  #FFFFFF;
+      --green:  #36a57a;
+    }
+
+    body { font-family: 'Raleway', sans-serif; background: var(--soft); color: var(--navy); font-size: 14px; }
+
+    .top-stripe { height: 4px; background: linear-gradient(90deg,#64C3D1,#326A84,#1F2C4E); }
+
+    /* ── HEADER ── */
+    .header-wrap {
+      background: linear-gradient(120deg,#64C3D1 0%,#326A84 50%,#1F2C4E 100%);
+    }
+
+    header {
+      padding: 18px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      line-height: 1;
+      gap: 1px;
+    }
+
+    .logo-confiance {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 26px;
+      color: #fff;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .logo-medical {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 16px;
+      color: rgba(255,255,255,0.88);
+      letter-spacing: 8px;
+      text-transform: uppercase;
+      padding-left: 2px;
+    }
+
+    .header-sep {
+      width: 1px;
+      height: 40px;
+      background: rgba(255,255,255,0.22);
+      margin: 0 22px;
+    }
+
+    .header-subtitle {
+      font-size: 13px;
+      color: rgba(255,255,255,0.72);
+      line-height: 1.5;
+    }
+
+    .header-subtitle strong { color: rgba(255,255,255,0.95); font-weight: 600; }
+
+    .header-right { display: flex; flex-direction: column; align-items: flex-end; gap: 5px; }
+
+    .event-pill {
+      background: var(--orange);
+      color: var(--navy);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: 20px;
+    }
+
+    .event-date { font-size: 11px; color: rgba(255,255,255,0.6); }
+
+    /* ── LAYOUT ── */
+    main { padding: 26px 36px 32px; max-width: 1200px; margin: 0 auto; }
+
+    .sec-head { margin-bottom: 20px; margin-top: 40px; padding-bottom: 10px; border-bottom: 1px solid #dde4e8; }
+    .sec-head:first-child { margin-top: 0; }
+    .sec-label {
+      font-family: 'Montserrat', sans-serif; font-weight: 900;
+      font-size: 13px; color: var(--navy); display: block;
+    }
+    .sec-line { display: none; }
+
+    .row   { display: flex; gap: 18px; }
+    .mb    { margin-bottom: 26px; }
+    .half  { flex: 1; min-width: 0; }
+    .third { flex: 1; min-width: 0; }
+
+    /* ── CARD ── */
+    .card {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 20px 22px;
+      box-shadow: 0 2px 14px rgba(31,44,78,0.07);
+    }
+
+    .eyebrow {
+      font-family: 'Montserrat', sans-serif; font-weight: 600;
+      font-size: 10px; text-transform: uppercase;
+      letter-spacing: 1.2px; color: var(--grey);
+      display: flex; align-items: center; gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .cdot { display: none; }
+
+    /* ── GAUGE ── */
+    .gauge-card { }
+    .gauge-card.alt { }
+    .gauge-center { display: flex; justify-content: center; }
+    .gauge-info { text-align: center; margin-top: 4px; }
+    .gauge-val { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 30px; color: var(--navy); line-height: 1; }
+    .gauge-meta { font-size: 12px; color: var(--grey); margin-top: 4px; }
+    .gauge-meta strong { color: var(--blue); font-weight: 600; }
+    .gauge-pct { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 14px; color: var(--orange); margin-top: 4px; }
+    .cond-pill {
+      margin-top: 12px; display: flex; align-items: center; gap: 8px;
+      background: #fff6e0; border-radius: 8px; padding: 7px 12px;
+      font-family: 'Montserrat', sans-serif; font-weight: 700;
+      font-size: 11px; color: var(--orange);
+    }
+
+    /* ── STAT ── */
+    .stat-card { }
+    .big-num { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 50px; color: var(--navy); line-height: 1; }
+    .frac { display: flex; align-items: baseline; gap: 4px; }
+    .frac-total { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 22px; color: #bcc9cf; }
+    .frac-sep   { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 18px; color: #c8d6db; }
+
+    .track { background: var(--ice); border-radius: 6px; height: 6px; margin: 10px 0 5px; overflow: hidden; }
+    .fill  { height: 100%; border-radius: 6px; }
+    .plbl  { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 12px; }
+
+    .dots { display: flex; flex-wrap: wrap; gap: 3px; margin-top: 10px; }
+    .dsq  { width: 8px; height: 8px; border-radius: 2px; }
+
+    .csplit { display: flex; gap: 14px; align-items: flex-end; margin-bottom: 12px; }
+    .cdiv   { width: 1px; height: 36px; background: #e4edf0; flex-shrink: 0; }
+    .cnum   { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 32px; color: var(--navy); line-height: 1; }
+    .cnum.m { color: #bcc9cf; }
+    .clbl   { font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 9px; text-transform: uppercase; letter-spacing: 0.8px; margin-top: 3px; }
+
+    /* ── NOVIDADES ── */
+    .nov-card { overflow: hidden; }
+    .nov-card.alt { }
+
+    .nov-photo {
+      width: 100%; height: 160px;
+      border-radius: 8px; overflow: hidden;
+      background: #e8f4f7;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .nov-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    .nov-body { display: flex; align-items: center; gap: 14px; }
+
+    .nov-icon {
+      width: 44px; height: 44px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+
+    .nov-title { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 16px; color: var(--navy); line-height: 1.2; }
+    .nov-tag {
+      display: inline-block; margin-top: 5px;
+      background: var(--ice); color: var(--blue);
+      font-family: 'Montserrat', sans-serif; font-weight: 700;
+      font-size: 9px; text-transform: uppercase; letter-spacing: 1px;
+      padding: 3px 9px; border-radius: 10px;
+    }
+
+    /* ── QUALIDADE ── */
+    .ok-card  { }
+    .ok-big   { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 52px; color: var(--green); line-height: 1; margin-bottom: 8px; }
+    .ok-badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      background: #eaf7f1; color: var(--green);
+      font-family: 'Montserrat', sans-serif; font-weight: 700;
+      font-size: 10px; text-transform: uppercase; letter-spacing: 0.6px;
+      padding: 4px 10px; border-radius: 20px;
+    }
+
+    .pend-card { }
+    .pend-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: #fff6e0; color: var(--orange);
+      font-family: 'Montserrat', sans-serif; font-weight: 700;
+      font-size: 10px; text-transform: uppercase;
+      padding: 5px 12px; border-radius: 20px; margin-top: 6px;
+    }
+    .pend-desc { font-size: 12px; color: var(--grey); margin-top: 8px; line-height: 1.6; }
+
+    /* ── BACKOFFICE ── */
+    .bo-card { }
+    .bo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+    .bo-box  { background: var(--ice); border-radius: 8px; padding: 10px 12px; }
+    .bo-val  { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 24px; color: var(--navy); line-height: 1; }
+    .bo-lbl  { font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 9px; text-transform: uppercase; letter-spacing: 0.7px; color: var(--blue); margin-top: 3px; }
+    .bo-sla  {
+      background: linear-gradient(90deg,var(--navy),var(--blue));
+      border-radius: 8px; padding: 9px 14px;
+      display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;
+    }
+    .bo-sla-lbl { font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 9px; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,0.6); }
+    .bo-sla-val { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 20px; color: var(--cyan); }
+    .bo-note    { font-size: 11px; color: var(--grey); line-height: 1.55; padding: 8px 10px; background: #f8fbfc; border-left: 3px solid var(--cyan); border-radius: 0 6px 6px 0; }
+    .bo-pub     { margin-top: 8px; font-size: 11px; color: var(--orange); font-family: 'Montserrat', sans-serif; font-weight: 600; display: flex; align-items: center; gap: 5px; }
+
+    /* ── REGIÃO ── */
+    .reg-card { }
+    .reg-row  { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid #f0f5f7; }
+    .reg-row:last-of-type { border-bottom: none; }
+    .reg-dot  { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+    .reg-name { font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 12px; color: var(--navy); min-width: 88px; }
+    .reg-bg   { flex: 1; background: #edf3f5; border-radius: 5px; height: 6px; overflow: hidden; }
+    .reg-fill { height: 100%; border-radius: 5px; }
+    .reg-n    { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 15px; color: var(--navy); min-width: 34px; text-align: right; }
+    .reg-sub  { font-size: 10px; color: #a0b4bc; min-width: 50px; text-align: right; }
+    .reg-tot  { display: flex; align-items: center; justify-content: space-between; margin-top: 12px; padding-top: 12px; border-top: 2px solid var(--ice); }
+    .reg-tot-lbl { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: var(--grey); }
+    .reg-tot-val { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 28px; color: var(--navy); }
+
+    /* ── FOOTER ── */
+    footer { padding: 14px 36px; border-top: 1px solid #cde3ea; display: flex; justify-content: space-between; align-items: center; }
+    .f-brand { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 10px; color: var(--blue); text-transform: uppercase; letter-spacing: 1px; }
+    .f-date  { font-size: 11px; color: var(--grey); }
+    .f-tag   { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 11px; color: var(--cyan); }
+
+    @media print {
+      body { background: white; }
+      header, .bo-sla { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="top-stripe"></div>
+
+<!-- ══════ HEADER ══════ -->
+<div class="header-wrap">
+<header>
+  <div style="display:flex;align-items:center;">
+    <!-- Logo real -->
+    <img src="logo_confiance-09.png" alt="Confiance Medical" style="height:120px;width:auto;object-fit:contain;"/>
+    <div class="header-sep"></div>
+    <div class="header-subtitle">
+      Dashboard de Resultados<br>
+      <strong>Hospitalar 2026</strong>
+    </div>
+  </div>
+  <div class="header-right">
+    <span class="event-pill">Hospitalar 2026</span>
+    <span class="event-date">Maior evento de saúde da América Latina · Maio 2026</span>
+  </div>
+</header>
+</div>
+
+<!-- ══════ MAIN ══════ -->
+<main>
+
+  <!-- FOTO EQUIPE -->
+  <div style="width:100%;height:300px;border-radius:12px;overflow:hidden;margin-bottom:26px;position:relative;box-shadow:0 2px 14px rgba(31,44,78,0.10);">
+    <img src="equipe confiance.png" alt="Equipe Confiance Medical — Hospitalar 2026"
+         style="width:100%;height:100%;object-fit:cover;object-position:center 50%;display:block;"/>
+    <div style="position:absolute;inset:0;background:linear-gradient(to right, rgba(31,44,78,0.55) 0%, transparent 60%);border-radius:12px;"></div>
+    <div style="position:absolute;bottom:18px;left:24px;">
+      <div style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:18px;color:#fff;letter-spacing:0.5px;text-shadow:0 1px 4px rgba(0,0,0,0.3);">Equipe Confiance Medical</div>
+      <div style="font-family:'Raleway',sans-serif;font-size:12px;color:rgba(255,255,255,0.8);margin-top:2px;">Hospitalar 2026 · São Paulo</div>
+    </div>
+  </div>
+
+  <!-- OBJETIVOS DA FEIRA -->
+  <div class="sec-head"><span class="sec-label">Objetivos da Feira</span><div class="sec-line"></div></div>
+  <div class="row mb" style="gap:14px;">
+    <div style="flex:1;min-width:0;background:#fff;border-radius:12px;padding:16px 20px;box-shadow:0 2px 14px rgba(31,44,78,0.07);display:flex;align-items:center;gap:12px;">
+      <div style="width:36px;height:36px;border-radius:9px;background:linear-gradient(135deg,#64C3D1,#326A84);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+      </div>
+      <span style="font-family:'Montserrat',sans-serif;font-weight:600;font-size:12px;color:var(--navy);line-height:1.4;">Vendas e geração de leads</span>
+    </div>
+    <div style="flex:1;min-width:0;background:#fff;border-radius:12px;padding:16px 20px;box-shadow:0 2px 14px rgba(31,44,78,0.07);display:flex;align-items:center;gap:12px;">
+      <div style="width:36px;height:36px;border-radius:9px;background:linear-gradient(135deg,#64C3D1,#326A84);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+      </div>
+      <span style="font-family:'Montserrat',sans-serif;font-weight:600;font-size:12px;color:var(--navy);line-height:1.4;">Relacionamento com clientes, parceiros e fornecedores</span>
+    </div>
+    <div style="flex:1;min-width:0;background:#fff;border-radius:12px;padding:16px 20px;box-shadow:0 2px 14px rgba(31,44,78,0.07);display:flex;align-items:center;gap:12px;">
+      <div style="width:36px;height:36px;border-radius:9px;background:linear-gradient(135deg,#64C3D1,#326A84);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      </div>
+      <span style="font-family:'Montserrat',sans-serif;font-weight:600;font-size:12px;color:var(--navy);line-height:1.4;">Reafirmação da marca no mercado</span>
+    </div>
+    <div style="flex:1;min-width:0;background:#fff;border-radius:12px;padding:16px 20px;box-shadow:0 2px 14px rgba(31,44,78,0.07);display:flex;align-items:center;gap:12px;">
+      <div style="width:36px;height:36px;border-radius:9px;background:linear-gradient(135deg,#64C3D1,#326A84);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+      </div>
+      <span style="font-family:'Montserrat',sans-serif;font-weight:600;font-size:12px;color:var(--navy);line-height:1.4;">Lançamento de novos produtos / atualizações</span>
+    </div>
+    <div style="flex:1;min-width:0;background:#fff;border-radius:12px;padding:16px 20px;box-shadow:0 2px 14px rgba(31,44,78,0.07);display:flex;align-items:center;gap:12px;">
+      <div style="width:36px;height:36px;border-radius:9px;background:linear-gradient(135deg,#64C3D1,#326A84);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <span style="font-family:'Montserrat',sans-serif;font-weight:600;font-size:12px;color:var(--navy);line-height:1.4;">Integração entre Confiantes</span>
+    </div>
+  </div>
+
+  <!-- 1. RESULTADOS FINANCEIROS -->
+  <div class="sec-head"><span class="sec-label">Resultados Financeiros</span><div class="sec-line"></div></div>
+  <div class="row mb">
+
+    <!-- Fechamento -->
+    <div class="half card gauge-card alt">
+      <div class="eyebrow"><span class="cdot" style="background:var(--orange)"></span>Fechamento de vendas</div>
+      <div class="gauge-center">
+        <svg viewBox="0 0 260 138" width="260" height="138" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="ga" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%"  stop-color="#4fce78"/><stop offset="33%" stop-color="#b5e03a"/>
+              <stop offset="66%" stop-color="#FFA300"/><stop offset="100%" stop-color="#e05c2e"/>
+            </linearGradient>
+          </defs>
+          <path d="M 30 123 A 100 100 0 0 1 230 123" fill="none" stroke="#f5dada" stroke-width="20" stroke-linecap="round"/>
+          <path d="M 30 123 A 100 100 0 0 1 208.1 60.6" fill="none" stroke="url(#ga)" stroke-width="20" stroke-linecap="round"/>
+          <line x1="130" y1="123" x2="196" y2="70" stroke="#FFA300" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="130" cy="123" r="7" fill="white" stroke="#FFA300" stroke-width="3"/>
+        </svg>
+      </div>
+      <div class="gauge-info">
+        <div class="gauge-val" style="font-size:20px;">R$ 2.750.001,30</div>
+        <div class="gauge-meta">Meta: <strong>R$ 3.500.000,00</strong></div>
+        <div class="gauge-pct">78,6% da meta</div>
+      </div>
+      <div class="cond-pill">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Condições especiais válidas até 30/06
+      </div>
+    </div>
+
+    <!-- Leads -->
+    <div class="half card gauge-card">
+      <div class="eyebrow"><span class="cdot" style="background:var(--cyan)"></span>Leads gerados no evento</div>
+      <div class="gauge-center">
+        <svg viewBox="0 0 260 138" width="260" height="138" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="gb" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%"  stop-color="#4fce78"/><stop offset="33%" stop-color="#b5e03a"/>
+              <stop offset="66%" stop-color="#FFA300"/><stop offset="100%" stop-color="#e05c2e"/>
+            </linearGradient>
+          </defs>
+          <path d="M 30 123 A 100 100 0 0 1 230 123" fill="none" stroke="#f5dada" stroke-width="20" stroke-linecap="round"/>
+          <path d="M 30 123 A 100 100 0 0 1 221.2 82.1" fill="none" stroke="url(#gb)" stroke-width="20" stroke-linecap="round"/>
+          <line x1="130" y1="123" x2="208" y2="88" stroke="#FFA300" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="130" cy="123" r="7" fill="white" stroke="#FFA300" stroke-width="3"/>
+        </svg>
+      </div>
+      <div class="gauge-info">
+        <div class="gauge-val" style="font-size:20px;">R$ 20.440.392,05</div>
+        <div class="gauge-meta">Meta: <strong>R$ 23.600.000,00</strong></div>
+        <div class="gauge-pct">86,6% da meta</div>
+      </div>
+      <div class="cond-pill">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        67 oportunidades em aberto · R$ 2.833.294,87 a fechar até 30/06
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FUNIL DE VENDAS -->
+  <div class="sec-head"><span class="sec-label">Funil de Vendas</span><div class="sec-line"></div></div>
+  <div class="row mb" style="gap:18px;align-items:stretch;">
+
+    <!-- Funil visual -->
+    <div style="flex:2;background:#fff;border-radius:12px;padding:20px 24px;box-shadow:0 2px 14px rgba(31,44,78,0.07);">
+      <div style="display:flex;flex-direction:column;gap:6px;align-items:center;">
+        <!-- Leads -->
+        <div style="width:100%;background:linear-gradient(90deg,#1F2C4E,#326A84);border-radius:8px;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;">
+          <div style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:26px;color:#fff;">108</div>
+          <div style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;color:rgba(255,255,255,0.85);text-transform:uppercase;letter-spacing:1px;">Leads captados</div>
+          <div style="font-size:10px;color:rgba(255,255,255,0.5);font-family:'Raleway',sans-serif;">Contatos qualificados gerados no evento</div>
+        </div>
+        <!-- Taxa 1 -->
+        <div style="display:flex;align-items:center;gap:8px;padding:4px 0;">
+          <div style="width:1px;height:20px;background:#d0e6ed;"></div>
+          <span style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:11px;color:#36a57a;background:#eaf7f1;padding:3px 10px;border-radius:10px;">95% leads → oportunidades</span>
+          <div style="width:1px;height:20px;background:#d0e6ed;"></div>
+        </div>
+        <!-- Oportunidades -->
+        <div style="width:88%;background:linear-gradient(90deg,#326A84,#64C3D1);border-radius:8px;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;">
+          <div style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:26px;color:#fff;">103</div>
+          <div>
+            <div style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;color:rgba(255,255,255,0.9);text-transform:uppercase;letter-spacing:1px;">Oportunidades</div>
+            <div style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:11px;color:rgba(255,255,255,0.75);margin-top:2px;">R$ 20.440.392,05</div>
+          </div>
+          <div style="font-size:10px;color:rgba(255,255,255,0.6);font-family:'Raleway',sans-serif;">Propostas em negociação ativa</div>
+        </div>
+        <!-- Taxa 2 -->
+        <div style="display:flex;align-items:center;gap:8px;padding:4px 0;">
+          <div style="width:1px;height:20px;background:#d0e6ed;"></div>
+          <span style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:11px;color:var(--orange);background:#fff6e0;padding:3px 10px;border-radius:10px;">21% oportunidades → ganhos</span>
+          <div style="width:1px;height:20px;background:#d0e6ed;"></div>
+        </div>
+        <!-- Ganhos -->
+        <div style="width:72%;background:linear-gradient(90deg,#36a57a,#2eaa5e);border-radius:8px;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;">
+          <div style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:26px;color:#fff;">22</div>
+          <div>
+            <div style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;color:rgba(255,255,255,0.9);text-transform:uppercase;letter-spacing:1px;">Ganhos</div>
+            <div style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:11px;color:rgba(255,255,255,0.75);margin-top:2px;">R$ 2.750.001,30</div>
+          </div>
+          <div style="font-size:10px;color:rgba(255,255,255,0.6);font-family:'Raleway',sans-serif;">Negócios fechados</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Métricas CRM -->
+    <div style="flex:1;display:flex;flex-direction:column;gap:12px;">
+      <div style="background:#fff;border-radius:12px;padding:16px 18px;box-shadow:0 2px 14px rgba(31,44,78,0.07);flex:1;display:flex;flex-direction:column;justify-content:center;">
+        <div style="font-family:'Montserrat',sans-serif;font-weight:600;font-size:9px;text-transform:uppercase;letter-spacing:1.2px;color:var(--grey);margin-bottom:6px;">Ticket Médio por Negócio</div>
+        <div style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:22px;color:var(--navy);">R$ 125.000,06</div>
+        <div style="font-size:10px;color:var(--grey);margin-top:3px;">por negócio ganho</div>
+      </div>
+      <div style="background:#fff;border-radius:12px;padding:16px 18px;box-shadow:0 2px 14px rgba(31,44,78,0.07);flex:1;display:flex;flex-direction:column;justify-content:center;">
+        <div style="font-family:'Montserrat',sans-serif;font-weight:600;font-size:9px;text-transform:uppercase;letter-spacing:1.2px;color:var(--grey);margin-bottom:6px;">Em Aberto</div>
+        <div style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:22px;color:var(--navy);">67</div>
+        <div style="font-size:10px;color:var(--grey);margin-top:3px;">oportunidades · previsão de fechar</div>
+        <div style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;color:var(--blue);margin-top:4px;">R$ 2.833.294,87</div>
+        <div style="font-size:10px;color:var(--orange);margin-top:2px;font-family:'Montserrat',sans-serif;font-weight:600;">até 30/06</div>
+      </div>
+      <div style="background:linear-gradient(135deg,#1F2C4E,#326A84);border-radius:12px;padding:16px 18px;flex:1;display:flex;flex-direction:column;justify-content:center;">
+        <div style="font-family:'Montserrat',sans-serif;font-weight:600;font-size:9px;text-transform:uppercase;letter-spacing:1.2px;color:rgba(255,255,255,0.55);margin-bottom:6px;">Potencial Total</div>
+        <div style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:18px;color:var(--cyan);">R$ 5.583.296,17</div>
+        <div style="font-size:10px;color:rgba(255,255,255,0.55);margin-top:3px;">ganhos + previsão em aberto</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- COMPARATIVO 2025 × 2026 -->
+  <div class="sec-head"><span class="sec-label">Comparativo 2025 × 2026 — Por Dia de Evento</span><div class="sec-line"></div></div>
+  <div class="row mb">
+
+    <!-- Vendas (esquerda) -->
+    <div class="half card" style="">
+      <div class="eyebrow"><span class="cdot" style="background:var(--orange)"></span>Fechamento de Vendas por Dia</div>
+      <div style="display:flex;gap:10px;margin-bottom:12px;">
+        <div style="flex:1;background:var(--ice);border-radius:7px;padding:8px 10px;text-align:center;">
+          <div style="font-family:'Montserrat',sans-serif;font-weight:600;font-size:9px;text-transform:uppercase;letter-spacing:0.8px;color:var(--grey);">Meta 2025</div>
+          <div style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:12px;color:var(--navy);margin-top:2px;">R$ 3.000.000,00</div>
+        </div>
+        <div style="flex:1;background:#fff6e0;border-radius:7px;padding:8px 10px;text-align:center;">
+          <div style="font-family:'Montserrat',sans-serif;font-weight:600;font-size:9px;text-transform:uppercase;letter-spacing:0.8px;color:var(--orange);">Meta 2026</div>
+          <div style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:12px;color:var(--navy);margin-top:2px;">R$ 3.500.000,00</div>
+        </div>
+      </div>
+      <table style="width:100%;border-collapse:collapse;font-family:'Montserrat',sans-serif;">
+        <thead>
+          <tr>
+            <th style="padding:4px 6px;"></th>
+            <th style="padding:3px 4px;text-align:center;">
+              <div style="background:#1F2C4E;border-radius:6px 6px 0 0;padding:5px 10px;font-weight:700;font-size:11px;color:#fff;letter-spacing:0.5px;">2025</div>
+            </th>
+            <th style="padding:3px 4px;text-align:center;">
+              <div style="background:linear-gradient(90deg,#FFA300,#e07a00);border-radius:6px 6px 0 0;padding:5px 10px;font-weight:700;font-size:11px;color:#fff;letter-spacing:0.5px;">2026</div>
+            </th>
+            <th style="padding:4px 6px;"></th>
+          </tr>
+          <tr style="border-bottom:2px solid #e4edf0;">
+            <th style="font-size:9px;text-transform:uppercase;letter-spacing:0.8px;color:var(--grey);font-weight:600;padding:5px 6px;text-align:left;">Dia</th>
+            <th style="font-size:9px;color:#8a9bb0;font-weight:600;padding:5px 8px;text-align:right;background:#f0f3f8;">Valor · % meta</th>
+            <th style="font-size:9px;color:#c07a00;font-weight:600;padding:5px 8px;text-align:right;background:#fff6e0;">Valor · % meta</th>
+            <th style="font-size:9px;text-transform:uppercase;letter-spacing:0.8px;color:var(--grey);font-weight:600;padding:5px 6px;text-align:right;">Δ</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid #edf2f5;">
+            <td style="padding:9px 6px;font-weight:700;font-size:11px;color:var(--navy);">Dia 1</td>
+            <td style="padding:9px 8px;text-align:right;background:#f5f7fb;"><div style="font-weight:900;font-size:11px;color:#1F2C4E;">R$ 358.000,00</div><div style="font-size:9px;color:#8a9bb0;margin-top:1px;">11,9% meta</div></td>
+            <td style="padding:9px 8px;text-align:right;background:#fff9ef;"><div style="font-weight:900;font-size:11px;color:#c07a00;">R$ 18.240,00</div><div style="font-size:9px;color:#FFA300;margin-top:1px;">0,5% meta</div></td>
+            <td style="padding:9px 6px;text-align:right;"><span style="background:#fff1f0;color:#e05c2e;font-weight:700;font-size:10px;padding:3px 7px;border-radius:5px;">-94,9%</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid #edf2f5;">
+            <td style="padding:9px 6px;font-weight:700;font-size:11px;color:var(--navy);">Dia 2</td>
+            <td style="padding:9px 8px;text-align:right;background:#f5f7fb;"><div style="font-weight:900;font-size:11px;color:#1F2C4E;">R$ 372.800,00</div><div style="font-size:9px;color:#8a9bb0;margin-top:1px;">12,4% meta</div></td>
+            <td style="padding:9px 8px;text-align:right;background:#fff9ef;"><div style="font-weight:900;font-size:11px;color:#c07a00;">R$ 1.028.741,35</div><div style="font-size:9px;color:#FFA300;margin-top:1px;">29,4% meta</div></td>
+            <td style="padding:9px 6px;text-align:right;"><span style="background:#eaf7f1;color:#36a57a;font-weight:700;font-size:10px;padding:3px 7px;border-radius:5px;">+175,9%</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid #edf2f5;">
+            <td style="padding:9px 6px;font-weight:700;font-size:11px;color:var(--navy);">Dia 3</td>
+            <td style="padding:9px 8px;text-align:right;background:#f5f7fb;"><div style="font-weight:900;font-size:11px;color:#1F2C4E;">R$ 374.450,00</div><div style="font-size:9px;color:#8a9bb0;margin-top:1px;">12,5% meta</div></td>
+            <td style="padding:9px 8px;text-align:right;background:#fff9ef;"><div style="font-weight:900;font-size:11px;color:#c07a00;">R$ 1.069.287,35</div><div style="font-size:9px;color:#FFA300;margin-top:1px;">30,6% meta</div></td>
+            <td style="padding:9px 6px;text-align:right;"><span style="background:#eaf7f1;color:#36a57a;font-weight:700;font-size:10px;padding:3px 7px;border-radius:5px;">+185,6%</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid #edf2f5;">
+            <td style="padding:9px 6px;font-weight:700;font-size:11px;color:var(--navy);">Dia 4</td>
+            <td style="padding:9px 8px;text-align:right;background:#f5f7fb;"><div style="font-weight:900;font-size:14px;color:#bcc9cf;">—</div><div style="font-size:9px;color:#8a9bb0;margin-top:1px;">sem registro</div></td>
+            <td style="padding:9px 8px;text-align:right;background:#fff9ef;"><div style="font-weight:900;font-size:11px;color:#c07a00;">R$ 2.209.654,15</div><div style="font-size:9px;color:#FFA300;margin-top:1px;">63,1% meta</div></td>
+            <td style="padding:9px 6px;text-align:right;"><span style="background:#eaf7f1;color:#36a57a;font-weight:700;font-size:10px;padding:3px 7px;border-radius:5px;">↑ novo</span></td>
+          </tr>
+          <tr style="background:linear-gradient(90deg,#f9f4ff,#fdf8ff);">
+            <td style="padding:9px 6px;font-weight:700;font-size:10px;color:#7c5cbf;white-space:nowrap;">Após a<br>Hospitalar</td>
+            <td style="padding:9px 8px;text-align:right;background:#f5f4f8;"><div style="font-weight:900;font-size:14px;color:#bcc9cf;">—</div><div style="font-size:9px;color:#8a9bb0;margin-top:1px;">sem registro</div></td>
+            <td style="padding:9px 8px;text-align:right;background:#f5f0ff;"><div style="font-weight:900;font-size:11px;color:#7c5cbf;">R$ 540.347,15</div><div style="font-size:9px;color:#a585d8;margin-top:1px;">15,4% meta</div></td>
+            <td style="padding:9px 6px;text-align:right;"><span style="background:#f0eaff;color:#7c5cbf;font-weight:700;font-size:10px;padding:3px 7px;border-radius:5px;">pós-feira</span></td>
+          </tr>
+          <tr style="background:#f0f3f8;border-top:2px solid #dde4e8;">
+            <td style="padding:10px 6px;font-family:'Montserrat',sans-serif;font-weight:900;font-size:10px;text-transform:uppercase;letter-spacing:0.8px;color:var(--navy);">Total</td>
+            <td style="padding:10px 8px;text-align:right;background:#e8edf4;"><div style="font-weight:900;font-size:12px;color:#1F2C4E;">R$ 374.450,00</div><div style="font-size:9px;color:#8a9bb0;margin-top:1px;">12,5% meta</div></td>
+            <td style="padding:10px 8px;text-align:right;background:#fef5e4;"><div style="font-weight:900;font-size:12px;color:#c07a00;">R$ 2.750.001,30</div><div style="font-size:9px;color:#FFA300;margin-top:1px;">78,6% meta</div></td>
+            <td style="padding:10px 6px;text-align:right;"><span style="background:#eaf7f1;color:#36a57a;font-weight:900;font-size:11px;padding:4px 8px;border-radius:5px;">+634,2%</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="margin-top:10px;font-size:10px;color:var(--grey);display:flex;align-items:center;gap:5px;padding:6px 8px;background:#fff6e0;border-radius:6px;border-left:3px solid var(--orange);">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        Vendas 2026 acumuladas: R$ 2.750.001,30 · Meta: R$ 3.500.000,00 (78,6%) · R$ 540.347,15 fechados após a feira
+      </div>
+    </div>
+
+    <!-- Leads (direita) -->
+    <div class="half card" style="">
+      <div class="eyebrow"><span class="cdot" style="background:var(--cyan)"></span>Geração de Leads por Dia</div>
+      <div style="display:flex;gap:10px;margin-bottom:12px;">
+        <div style="flex:1;background:var(--ice);border-radius:7px;padding:8px 10px;text-align:center;">
+          <div style="font-family:'Montserrat',sans-serif;font-weight:600;font-size:9px;text-transform:uppercase;letter-spacing:0.8px;color:var(--grey);">Meta 2025</div>
+          <div style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:12px;color:var(--navy);margin-top:2px;">R$ 20.200.000,00</div>
+        </div>
+        <div style="flex:1;background:linear-gradient(135deg,#e8f9fc,#d0f0f5);border-radius:7px;padding:8px 10px;text-align:center;">
+          <div style="font-family:'Montserrat',sans-serif;font-weight:600;font-size:9px;text-transform:uppercase;letter-spacing:0.8px;color:var(--blue);">Meta 2026</div>
+          <div style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:12px;color:var(--navy);margin-top:2px;">R$ 23.600.000,00</div>
+        </div>
+      </div>
+      <table style="width:100%;border-collapse:collapse;font-family:'Montserrat',sans-serif;">
+        <thead>
+          <tr>
+            <th style="padding:4px 6px;"></th>
+            <th style="padding:3px 4px;text-align:center;">
+              <div style="background:#1F2C4E;border-radius:6px 6px 0 0;padding:5px 10px;font-weight:700;font-size:11px;color:#fff;letter-spacing:0.5px;">2025</div>
+            </th>
+            <th style="padding:3px 4px;text-align:center;">
+              <div style="background:linear-gradient(90deg,#64C3D1,#326A84);border-radius:6px 6px 0 0;padding:5px 10px;font-weight:700;font-size:11px;color:#fff;letter-spacing:0.5px;">2026</div>
+            </th>
+            <th style="padding:4px 6px;"></th>
+          </tr>
+          <tr style="border-bottom:2px solid #e4edf0;">
+            <th style="font-size:9px;text-transform:uppercase;letter-spacing:0.8px;color:var(--grey);font-weight:600;padding:5px 6px;text-align:left;">Dia</th>
+            <th style="font-size:9px;color:#8a9bb0;font-weight:600;padding:5px 8px;text-align:right;background:#f0f3f8;">Valor · % meta</th>
+            <th style="font-size:9px;color:#2d8fa0;font-weight:600;padding:5px 8px;text-align:right;background:#e8f9fc;">Valor · % meta</th>
+            <th style="font-size:9px;text-transform:uppercase;letter-spacing:0.8px;color:var(--grey);font-weight:600;padding:5px 6px;text-align:right;">Δ</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid #edf2f5;">
+            <td style="padding:9px 6px;font-weight:700;font-size:11px;color:var(--navy);">Dia 1</td>
+            <td style="padding:9px 8px;text-align:right;background:#f5f7fb;"><div style="font-weight:900;font-size:11px;color:#1F2C4E;">R$ 3.815.566,50</div><div style="font-size:9px;color:#8a9bb0;margin-top:1px;">18,9% meta</div></td>
+            <td style="padding:9px 8px;text-align:right;background:#e8f9fc;"><div style="font-weight:900;font-size:11px;color:#326A84;">R$ 5.253.846,34</div><div style="font-size:9px;color:#64C3D1;margin-top:1px;">22,3% meta</div></td>
+            <td style="padding:9px 6px;text-align:right;"><span style="background:#eaf7f1;color:#36a57a;font-weight:700;font-size:10px;padding:3px 7px;border-radius:5px;">+37,7%</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid #edf2f5;">
+            <td style="padding:9px 6px;font-weight:700;font-size:11px;color:var(--navy);">Dia 2</td>
+            <td style="padding:9px 8px;text-align:right;background:#f5f7fb;"><div style="font-weight:900;font-size:11px;color:#1F2C4E;">R$ 9.026.180,02</div><div style="font-size:9px;color:#8a9bb0;margin-top:1px;">44,7% meta</div></td>
+            <td style="padding:9px 8px;text-align:right;background:#e8f9fc;"><div style="font-weight:900;font-size:11px;color:#326A84;">R$ 8.785.231,08</div><div style="font-size:9px;color:#64C3D1;margin-top:1px;">37,2% meta</div></td>
+            <td style="padding:9px 6px;text-align:right;"><span style="background:#fff1f0;color:#e05c2e;font-weight:700;font-size:10px;padding:3px 7px;border-radius:5px;">-2,7%</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid #edf2f5;">
+            <td style="padding:9px 6px;font-weight:700;font-size:11px;color:var(--navy);">Dia 3</td>
+            <td style="padding:9px 8px;text-align:right;background:#f5f7fb;"><div style="font-weight:900;font-size:11px;color:#1F2C4E;">R$ 16.231.658,05</div><div style="font-size:9px;color:#8a9bb0;margin-top:1px;">80,4% meta</div></td>
+            <td style="padding:9px 8px;text-align:right;background:#e8f9fc;"><div style="font-weight:900;font-size:11px;color:#326A84;">R$ 15.169.620,81</div><div style="font-size:9px;color:#64C3D1;margin-top:1px;">64,3% meta</div></td>
+            <td style="padding:9px 6px;text-align:right;"><span style="background:#fff1f0;color:#e05c2e;font-weight:700;font-size:10px;padding:3px 7px;border-radius:5px;">-6,5%</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid #edf2f5;">
+            <td style="padding:9px 6px;font-weight:700;font-size:11px;color:var(--navy);">Dia 4</td>
+            <td style="padding:9px 8px;text-align:right;background:#f5f7fb;"><div style="font-weight:900;font-size:11px;color:#1F2C4E;">R$ 21.188.885,10</div><div style="font-size:9px;color:#36a57a;margin-top:1px;">104,9% ✓ meta</div></td>
+            <td style="padding:9px 8px;text-align:right;background:#e8f9fc;"><div style="font-weight:900;font-size:11px;color:#326A84;">R$ 18.376.067,20</div><div style="font-size:9px;color:#64C3D1;margin-top:1px;">77,9% meta</div></td>
+            <td style="padding:9px 6px;text-align:right;"><span style="background:#fff1f0;color:#e05c2e;font-weight:700;font-size:10px;padding:3px 7px;border-radius:5px;">-13,3%</span></td>
+          </tr>
+          <tr style="background:linear-gradient(90deg,#f9f4ff,#fdf8ff);">
+            <td style="padding:9px 6px;font-weight:700;font-size:10px;color:#7c5cbf;white-space:nowrap;">Após a<br>Hospitalar</td>
+            <td style="padding:9px 8px;text-align:right;background:#f5f4f8;"><div style="font-weight:900;font-size:14px;color:#bcc9cf;">—</div><div style="font-size:9px;color:#8a9bb0;margin-top:1px;">sem registro</div></td>
+            <td style="padding:9px 8px;text-align:right;background:#f5f0ff;"><div style="font-weight:900;font-size:11px;color:#7c5cbf;">R$ 2.064.324,85</div><div style="font-size:9px;color:#a585d8;margin-top:1px;">8,7% meta</div></td>
+            <td style="padding:9px 6px;text-align:right;"><span style="background:#f0eaff;color:#7c5cbf;font-weight:700;font-size:10px;padding:3px 7px;border-radius:5px;">pós-feira</span></td>
+          </tr>
+          <tr style="background:#f0f3f8;border-top:2px solid #dde4e8;">
+            <td style="padding:10px 6px;font-family:'Montserrat',sans-serif;font-weight:900;font-size:10px;text-transform:uppercase;letter-spacing:0.8px;color:var(--navy);">Total</td>
+            <td style="padding:10px 8px;text-align:right;background:#e8edf4;"><div style="font-weight:900;font-size:12px;color:#1F2C4E;">R$ 21.188.885,10</div><div style="font-size:9px;color:#36a57a;margin-top:1px;">104,9% ✓ meta</div></td>
+            <td style="padding:10px 8px;text-align:right;background:#e4f7f9;"><div style="font-weight:900;font-size:12px;color:#326A84;">R$ 20.440.392,05</div><div style="font-size:9px;color:#64C3D1;margin-top:1px;">86,6% meta</div></td>
+            <td style="padding:10px 6px;text-align:right;"><span style="background:#fff1f0;color:#e05c2e;font-weight:900;font-size:11px;padding:4px 8px;border-radius:5px;">−3,5%</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="margin-top:10px;font-size:10px;color:var(--grey);display:flex;align-items:center;gap:5px;padding:6px 8px;background:#f8fbfc;border-radius:6px;border-left:3px solid var(--cyan);">
+        <svg width="11" height="11" viewBox="0 0 12 12"><circle cx="6" cy="6" r="5.5" fill="#36a57a"/><path d="M3 6l2 2 4-4" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+        2025 bateu a meta no Dia 4 (104,9%) · 2026: R$ 20.440.392,05 acumulados · R$ 2.064.324,85 gerados após a feira
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ANÁLISE IA -->
+  <div style="background:linear-gradient(135deg,#1F2C4E 0%,#326A84 100%);border-radius:12px;padding:16px 22px;margin-bottom:26px;display:flex;align-items:flex-start;gap:14px;">
+    <div style="flex-shrink:0;width:34px;height:34px;border-radius:9px;background:rgba(100,195,209,0.18);border:1px solid rgba(100,195,209,0.35);display:flex;align-items:center;justify-content:center;margin-top:2px;">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#64C3D1" stroke-width="2" stroke-linecap="round"><path d="M12 2a5 5 0 015 5c0 2.1-1.3 4-3.2 4.8L14 21H10l.2-9.2C8.3 11 7 9.1 7 7a5 5 0 015-5z"/><line x1="10" y1="17" x2="14" y2="17"/></svg>
+    </div>
+    <div style="flex:1;">
+      <div style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:9px;text-transform:uppercase;letter-spacing:1.5px;color:#64C3D1;margin-bottom:8px;">Análise · IA</div>
+      <p style="font-family:'Raleway',sans-serif;font-size:12px;color:rgba(255,255,255,0.90);line-height:1.65;margin-bottom:6px;">
+        <strong style="color:#fff;">Em vendas,</strong> o padrão foi de queda acentuada no Dia 1 (–94,9%) compensada por crescimento expressivo nos dias 2 e 3 (+175% e +186%), indicando maturação do ciclo de fechamento e concentração das negociações no final da feira — perfil que deve orientar o planejamento de equipe e metas diárias para o Hospitalar 2027.
+      </p>
+      <p style="font-family:'Raleway',sans-serif;font-size:12px;color:rgba(255,255,255,0.90);line-height:1.65;">
+        <strong style="color:#fff;">Em leads,</strong> 2026 arrancou 37,7% acima de 2025 no Dia 1, mas desacelerou progressivamente — encerrando 13,3% abaixo do acumulado de 2025 no Dia 4, o que sugere menor conversão no meio do evento e oportunidade de reforçar a abordagem ativa nos dias centrais nas próximas edições.
+      </p>
+    </div>
+  </div>
+
+  <!-- 2. NOVIDADES (antes do operacional) -->
+  <div class="sec-head"><span class="sec-label">Novidades Apresentadas</span><div class="sec-line"></div></div>
+  <div class="row mb">
+
+    <!-- Novas Óticas — com foto -->
+    <div class="half card nov-card">
+      <div class="eyebrow"><span class="cdot" style="background:var(--cyan)"></span>Novas Óticas Confiance</div>
+      <!-- Foto do produto: salve a imagem como otica_confiance.jpg na mesma pasta -->
+      <div class="nov-photo" id="foto-otica">
+        <img src="óticas confiance.png" alt="Novas Óticas Confiance"
+             style="width:100%;height:100%;object-fit:cover;border-radius:8px;"/>
+      </div>
+      <div class="nov-body">
+        <div class="nov-icon" style="background:linear-gradient(135deg,#64C3D1,#326A84)">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="11"/></svg>
+        </div>
+        <div>
+          <div class="nov-title">Novas Óticas Confiance</div>
+          <span class="nov-tag">Lançamento</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- CM-LASER -->
+    <div class="half card nov-card alt">
+      <div class="eyebrow"><span class="cdot" style="background:var(--orange)"></span>CM-LASER</div>
+      <div class="nov-photo">
+        <img src="cm-laser.png" alt="CM-LASER" style="width:100%;height:100%;object-fit:cover;border-radius:8px;"/>
+      </div>
+      <div class="nov-body">
+        <div class="nov-icon" style="background:linear-gradient(135deg,#FFA300,#e05c2e)">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        </div>
+        <div>
+          <div class="nov-title">CM-LASER</div>
+          <span class="nov-tag">Lançamento</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 3. OPERACIONAL -->
+  <div class="sec-head"><span class="sec-label">Operacional do Evento</span><div class="sec-line"></div></div>
+  <div class="row mb">
+
+    <div class="third card stat-card" style="border-top-color:var(--cyan)">
+      <div class="eyebrow"><span class="cdot" style="background:var(--cyan)"></span>Produtos exibidos</div>
+      <div class="big-num" style="font-size:54px;">51</div>
+      <div style="font-family:'Montserrat',sans-serif;font-weight:600;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--teal);margin-top:8px;">Produtos na feira</div>
+      <div style="font-size:11px;color:var(--grey);margin-top:4px;">Incluindo stand da Clean Medical</div>
+    </div>
+
+    <div class="third card stat-card">
+      <div class="eyebrow"><span class="cdot" style="background:var(--green)"></span>Tarefas MKT</div>
+      <div class="frac">
+        <span class="big-num" style="color:var(--green)">54</span>
+        <span class="frac-sep">/</span>
+        <span class="frac-total">54</span>
+      </div>
+      <div class="track"><div class="fill" style="width:100%;background:linear-gradient(90deg,#36a57a,#2eaa5e)"></div></div>
+      <div class="plbl" style="color:var(--green)">100% concluídas ✓</div>
+    </div>
+
+    <div class="third card stat-card" style="border-top-color:var(--teal)">
+      <div class="eyebrow"><span class="cdot" style="background:var(--teal)"></span>Conteúdos · Total: 94</div>
+      <div class="csplit">
+        <div><div class="cnum">84</div><div class="clbl" style="color:var(--teal)">Publicados</div></div>
+        <div class="cdiv"></div>
+        <div><div class="cnum m">9</div><div class="clbl" style="color:#bcc9cf">Planejados</div></div>
+        <div class="cdiv"></div>
+        <div><div class="cnum" style="color:#e05c2e;">1</div><div class="clbl" style="color:#e05c2e;">Reprovados</div></div>
+      </div>
+      <div class="track"><div class="fill" style="width:89.4%;background:linear-gradient(90deg,#64C3D1,#1E9DBA)"></div></div>
+      <div class="plbl" style="color:var(--teal)">89,4% publicados</div>
+    </div>
+
+  </div>
+
+  <!-- 4. BACKOFFICE + REGIÕES (juntos) -->
+  <div class="sec-head"><span class="sec-label">Backoffice & Atividades por Região</span><div class="sec-line"></div></div>
+  <div class="row mb">
+
+    <!-- Backoffice -->
+    <div class="half card bo-card">
+      <div class="eyebrow"><span class="cdot" style="background:var(--navy)"></span>Atividades Backoffice</div>
+      <div class="bo-grid">
+        <div class="bo-box">
+          <div class="bo-val">181</div>
+          <div class="bo-lbl">Propostas emitidas</div>
+        </div>
+        <div class="bo-box">
+          <div class="bo-val">136</div>
+          <div class="bo-lbl">Propostas enviadas</div>
+        </div>
+        <div class="bo-box">
+          <div class="bo-val">82</div>
+          <div class="bo-lbl">Hospitais atendidos</div>
+        </div>
+        <div class="bo-box" style="background:transparent;padding-left:4px;">
+          <div class="bo-val" style="font-size:22px;">1h39min</div>
+          <div class="bo-lbl">SLA Médio</div>
+        </div>
+      </div>
+      <div class="bo-note">
+        Emissão de proposta · Precificação · Análise crítica · Análise financeira · Emissão de contrato · Colocação de pedido
+      </div>
+      <div style="margin-top:8px;display:flex;align-items:center;gap:8px;background:var(--ice);border-radius:8px;padding:8px 12px;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="11"/></svg>
+        <span style="font-family:'Montserrat',sans-serif;font-weight:600;font-size:11px;color:var(--blue);">Propostas de Óticas Confiance: <strong>resultados em breve</strong></span>
+      </div>
+      <div class="bo-pub">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        Setor público: números em apuração
+      </div>
+    </div>
+
+    <!-- Regiões -->
+    <div class="half card reg-card">
+      <div class="eyebrow"><span class="cdot" style="background:var(--navy)"></span>Distribuição de atividades</div>
+
+      <div class="reg-row">
+        <span class="reg-dot" style="background:#4fce78"></span>
+        <span class="reg-name">Norte / NE</span>
+        <div class="reg-bg"><div class="reg-fill" style="width:100%;background:linear-gradient(90deg,#4fce78,#2eaa5e)"></div></div>
+        <span class="reg-n">235</span>
+        <span class="reg-sub">atividades</span>
+      </div>
+
+      <div class="reg-row">
+        <span class="reg-dot" style="background:#e05c2e"></span>
+        <span class="reg-name">SP</span>
+        <div class="reg-bg"><div class="reg-fill" style="width:83.4%;background:linear-gradient(90deg,#FFA300,#e05c2e)"></div></div>
+        <span class="reg-n">196</span>
+        <span class="reg-sub">atividades</span>
+      </div>
+
+      <div class="reg-row">
+        <span class="reg-dot" style="background:var(--blue)"></span>
+        <span class="reg-name">RJ / ES / Sul</span>
+        <div class="reg-bg"><div class="reg-fill" style="width:62.6%;background:linear-gradient(90deg,#64C3D1,#326A84)"></div></div>
+        <span class="reg-n">147</span>
+        <span class="reg-sub">atividades</span>
+      </div>
+
+      <div class="reg-row">
+        <span class="reg-dot" style="background:var(--orange)"></span>
+        <span class="reg-name">MG / CO</span>
+        <div class="reg-bg"><div class="reg-fill" style="width:40.4%;background:linear-gradient(90deg,#FFD166,#FFA300)"></div></div>
+        <span class="reg-n">95</span>
+        <span class="reg-sub">atividades</span>
+      </div>
+
+      <div class="reg-tot">
+        <span class="reg-tot-lbl">Total de atividades</span>
+        <span class="reg-tot-val">673</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 5. QUALIDADE -->
+  <div class="sec-head"><span class="sec-label">Qualidade & Status</span><div class="sec-line"></div></div>
+  <div class="row mb">
+
+    <!-- Intercorrências -->
+    <div class="half card ok-card">
+      <div class="eyebrow"><span class="cdot" style="background:var(--green)"></span>Intercorrências</div>
+      <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:8px;">
+        <div class="ok-big">3</div>
+        <span class="ok-badge">
+          <svg width="11" height="11" viewBox="0 0 12 12"><circle cx="6" cy="6" r="5.5" fill="#36a57a"/><path d="M3 6l2 2 4-4" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+          Todas resolvidas &lt; 24h
+        </span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px;margin-top:4px;">
+        <div style="display:flex;align-items:flex-start;gap:8px;padding:7px 10px;background:#f3fbf7;border-radius:7px;border-left:3px solid #36a57a;">
+          <span style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:11px;color:#36a57a;flex-shrink:0;">1</span>
+          <span style="font-size:11px;color:var(--navy);line-height:1.4;">Problema com LED Fluorescência</span>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:8px;padding:7px 10px;background:#f3fbf7;border-radius:7px;border-left:3px solid #36a57a;">
+          <span style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:11px;color:#36a57a;flex-shrink:0;">2</span>
+          <span style="font-size:11px;color:var(--navy);line-height:1.4;">Não envio de CM-100</span>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:8px;padding:7px 10px;background:#f3fbf7;border-radius:7px;border-left:3px solid #36a57a;">
+          <span style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:11px;color:#36a57a;flex-shrink:0;">3</span>
+          <span style="font-size:11px;color:var(--navy);line-height:1.4;">Problemas com Buffet no 1° dia</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pesquisa -->
+    <div class="half card pend-card">
+      <div class="eyebrow"><span class="cdot" style="background:var(--orange)"></span>Pesquisa de Satisfação · 21 respondentes</div>
+      <!-- Nota geral + NPS -->
+      <div style="display:flex;align-items:stretch;gap:12px;margin-bottom:14px;">
+        <!-- NPS Score -->
+        <div style="flex:1;background:#f5f7fb;border-radius:10px;padding:12px 14px;text-align:center;">
+          <div style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:36px;color:var(--navy);line-height:1;">86</div>
+          <div style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:8px;text-transform:uppercase;letter-spacing:1.2px;color:var(--grey);margin-top:4px;">NPS Score</div>
+        </div>
+        <!-- Média -->
+        <div style="flex:1;background:#fff6e0;border-radius:10px;padding:12px 14px;text-align:center;">
+          <div style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:36px;color:var(--orange);line-height:1;">9,0</div>
+          <div style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:8px;text-transform:uppercase;letter-spacing:1.2px;color:var(--grey);margin-top:4px;">Média Geral</div>
+        </div>
+        <!-- Respondentes -->
+        <div style="flex:1;background:#eaf7f1;border-radius:10px;padding:12px 14px;text-align:center;">
+          <div style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:36px;color:var(--green);line-height:1;">21</div>
+          <div style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:8px;text-transform:uppercase;letter-spacing:1.2px;color:var(--grey);margin-top:4px;">Respondentes</div>
+        </div>
+      </div>
+      <!-- Barra NPS: Detratores / Neutros / Promotores -->
+      <div style="margin-bottom:14px;">
+        <div style="display:flex;border-radius:6px;overflow:hidden;height:10px;gap:2px;margin-bottom:6px;">
+          <div style="width:5%;background:#e05c2e;border-radius:4px 0 0 4px;"></div>
+          <div style="width:5%;background:#FFA300;"></div>
+          <div style="width:90%;background:var(--green);border-radius:0 4px 4px 0;"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;">
+          <div style="text-align:left;">
+            <div style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:10px;color:#e05c2e;">Detratores</div>
+            <div style="font-size:9px;color:var(--grey);">5% · 1 pessoa</div>
+          </div>
+          <div style="text-align:center;">
+            <div style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:10px;color:var(--orange);">Neutros</div>
+            <div style="font-size:9px;color:var(--grey);">5% · 1 pessoa</div>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:10px;color:var(--green);">Promotores</div>
+            <div style="font-size:9px;color:var(--grey);">90% · 19 pessoas</div>
+          </div>
+        </div>
+      </div>
+      <!-- Grade de notas -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:14px;">
+        <div style="background:#fff6e0;border-radius:7px;padding:7px 10px;">
+          <div style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:18px;color:var(--orange);">9,8</div>
+          <div style="font-family:'Montserrat',sans-serif;font-weight:600;font-size:9px;color:var(--grey);text-transform:uppercase;letter-spacing:0.5px;">Time de Marketing</div>
+        </div>
+        <div style="background:#f0fbfd;border-radius:7px;padding:7px 10px;">
+          <div style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:18px;color:var(--cyan);">9,4</div>
+          <div style="font-family:'Montserrat',sans-serif;font-weight:600;font-size:9px;color:var(--grey);text-transform:uppercase;letter-spacing:0.5px;">Backoffice · Agilidade</div>
+        </div>
+        <div style="background:#f0fbfd;border-radius:7px;padding:7px 10px;">
+          <div style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:18px;color:var(--blue);">9,1</div>
+          <div style="font-family:'Montserrat',sans-serif;font-weight:600;font-size:9px;color:var(--grey);text-transform:uppercase;letter-spacing:0.5px;">Layout do Stand</div>
+        </div>
+        <div style="background:#fff1f0;border-radius:7px;padding:7px 10px;position:relative;">
+          <div style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:18px;color:#e05c2e;">6,9</div>
+          <div style="font-family:'Montserrat',sans-serif;font-weight:600;font-size:9px;color:var(--grey);text-transform:uppercase;letter-spacing:0.5px;">Tamanho do Stand</div>
+          <span style="position:absolute;top:6px;right:8px;font-size:9px;background:#e05c2e;color:#fff;border-radius:4px;padding:1px 5px;font-family:'Montserrat',sans-serif;font-weight:700;">⚠ atenção</span>
+        </div>
+        <div style="background:#f5f7fb;border-radius:7px;padding:7px 10px;">
+          <div style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:18px;color:var(--navy);">9,4</div>
+          <div style="font-family:'Montserrat',sans-serif;font-weight:600;font-size:9px;color:var(--grey);text-transform:uppercase;letter-spacing:0.5px;">App Comercial</div>
+        </div>
+        <div style="background:#eaf7f1;border-radius:7px;padding:7px 10px;">
+          <div style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:18px;color:#36a57a;">10,0</div>
+          <div style="font-family:'Montserrat',sans-serif;font-weight:600;font-size:9px;color:var(--grey);text-transform:uppercase;letter-spacing:0.5px;">Micro-ônibus</div>
+        </div>
+      </div>
+      <!-- Alerta principal -->
+      <div style="background:#fff1f0;border-radius:7px;padding:8px 10px;margin-bottom:12px;border-left:3px solid #e05c2e;font-size:10px;color:#c04020;font-family:'Raleway',sans-serif;line-height:1.5;">
+        <strong>Principal ponto de atenção:</strong> Tamanho do stand foi criticado por quase todos os respondentes. Consenso: já chegamos no limite do limite — precisamos de pelo menos +15m² para 2027.
+      </div>
+      <a href="../uploads/resultados-hospitalar-2026-2026-06-17.pdf" target="_blank"
+         style="margin-top:14px;display:inline-flex;align-items:center;gap:8px;
+                background:linear-gradient(90deg,var(--navy),var(--blue));
+                color:#fff;font-family:'Montserrat',sans-serif;font-weight:700;
+                font-size:11px;text-transform:uppercase;letter-spacing:1px;
+                padding:9px 18px;border-radius:8px;text-decoration:none;
+                box-shadow:0 2px 8px rgba(31,44,78,0.25);transition:opacity .2s;"
+         onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        Ver Resultados da Pesquisa (PDF)
+      </a>
+    </div>
+
+  </div>
+
+  <!-- PESQUISA DE SATISFAÇÃO E FEEDBACKS -->
+  <div class="sec-head"><span class="sec-label">Pesquisa de Satisfação e Feedbacks · Hospitalar 2026</span><div class="sec-line"></div></div>
+  <div style="font-size:11px;color:var(--grey);margin-bottom:16px;font-family:'Raleway',sans-serif;">Consolidado da reunião de retrospectiva e pesquisa interna de satisfação. Inclui pontos de melhoria para o planejamento da Hospitalar 2027.</div>
+
+  <div class="row mb" style="gap:14px;">
+
+    <!-- Stand & Espaço -->
+    <div style="flex:1;min-width:0;background:#fff;border-radius:12px;padding:18px 18px;box-shadow:0 2px 14px rgba(31,44,78,0.07);">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+        <div style="width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,#e05c2e,#FFA300);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round"><rect x="2" y="7" width="20" height="14" rx="1"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>
+        </div>
+        <span style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:11px;color:#e05c2e;text-transform:uppercase;letter-spacing:0.8px;">Stand &amp; Espaço</span>
+        <span style="background:#fff1f0;color:#e05c2e;font-family:'Montserrat',sans-serif;font-weight:700;font-size:9px;padding:2px 7px;border-radius:10px;margin-left:auto;">⚠ Urgente</span>
+      </div>
+      <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:7px;">
+        <li style="font-size:11px;color:var(--navy);line-height:1.5;padding-left:14px;position:relative;"><span style="position:absolute;left:0;color:#e05c2e;font-weight:700;">›</span>Ampliar para ao menos +15m² em 2027 — stand no limite de capacidade para o time e os produtos</li>
+        <li style="font-size:11px;color:var(--navy);line-height:1.5;padding-left:14px;position:relative;"><span style="position:absolute;left:0;color:#e05c2e;font-weight:700;">›</span>Cobrar acabamentos e prazo da montadora (Maranata) — stand não foi entregue às 14h</li>
+        <li style="font-size:11px;color:var(--navy);line-height:1.5;padding-left:14px;position:relative;"><span style="position:absolute;left:0;color:#e05c2e;font-weight:700;">›</span>Ter alguém do MKT acompanhando a montagem até a entrega final do stand</li>
+        <li style="font-size:11px;color:var(--navy);line-height:1.5;padding-left:14px;position:relative;"><span style="position:absolute;left:0;color:#e05c2e;font-weight:700;">›</span>Avaliar separação da Bhio para 2027 (mantendo-se vizinhos)</li>
+        <li style="font-size:11px;color:var(--navy);line-height:1.5;padding-left:14px;position:relative;"><span style="position:absolute;left:0;color:#e05c2e;font-weight:700;">›</span>Toda montagem em case — sem caixas abertas no stand</li>
+      </ul>
+    </div>
+
+    <!-- Pré-evento / Domingo -->
+    <div style="flex:1;min-width:0;background:#fff;border-radius:12px;padding:18px 18px;box-shadow:0 2px 14px rgba(31,44,78,0.07);">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+        <div style="width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,#64C3D1,#326A84);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        </div>
+        <span style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:11px;color:var(--blue);text-transform:uppercase;letter-spacing:0.8px;">Pré-evento · Domingo</span>
+      </div>
+      <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:7px;">
+        <li style="font-size:11px;color:var(--navy);line-height:1.5;padding-left:14px;position:relative;"><span style="position:absolute;left:0;color:var(--blue);font-weight:700;">›</span>Repetir a ida ao domingo na CMSP com time de MKT + conteúdo — aproveitar para montar kits e separar materiais</li>
+        <li style="font-size:11px;color:var(--navy);line-height:1.5;padding-left:14px;position:relative;"><span style="position:absolute;left:0;color:var(--blue);font-weight:700;">›</span>Antecipar embalagem dos armários ainda no domingo</li>
+        <li style="font-size:11px;color:var(--navy);line-height:1.5;padding-left:14px;position:relative;"><span style="position:absolute;left:0;color:var(--blue);font-weight:700;">›</span>Autorizar a chave da CMSP ficar permanentemente com a Marilia para acesso facilitado</li>
+        <li style="font-size:11px;color:var(--navy);line-height:1.5;padding-left:14px;position:relative;"><span style="position:absolute;left:0;color:var(--blue);font-weight:700;">›</span>Incluir Cássia pelo menos 2 dias antes — adiantamento de brindes, kits e organização geral</li>
+        <li style="font-size:11px;color:var(--navy);line-height:1.5;padding-left:14px;position:relative;"><span style="position:absolute;left:0;color:var(--blue);font-weight:700;">›</span>Marcar no calendário: barris de chope chegam na sexta (pré-evento)</li>
+      </ul>
+    </div>
+
+    <!-- Equipamentos & P&D -->
+    <div style="flex:1;min-width:0;background:#fff;border-radius:12px;padding:18px 18px;box-shadow:0 2px 14px rgba(31,44,78,0.07);">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+        <div style="width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,#1E9DBA,#326A84);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+        </div>
+        <span style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:11px;color:var(--teal);text-transform:uppercase;letter-spacing:0.8px;">Equipamentos &amp; P&amp;D</span>
+      </div>
+      <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:7px;">
+        <li style="font-size:11px;color:var(--navy);line-height:1.5;padding-left:14px;position:relative;"><span style="position:absolute;left:0;color:var(--teal);font-weight:700;">›</span>P&amp;D deve entregar os equipamentos antes da fair começar — entrega na segunda impacta todos os setores</li>
+        <li style="font-size:11px;color:var(--navy);line-height:1.5;padding-left:14px;position:relative;"><span style="position:absolute;left:0;color:var(--teal);font-weight:700;">›</span>Comunicar dimensões físicas de produtos novos com antecedência — ninguém tinha noção do tamanho do CM-LASER</li>
+        <li style="font-size:11px;color:var(--navy);line-height:1.5;padding-left:14px;position:relative;"><span style="position:absolute;left:0;color:var(--teal);font-weight:700;">›</span>Treinamento obrigatório + código de bem para todo produto novo antes da feira (o laser foi sem ambos)</li>
+        <li style="font-size:11px;color:var(--navy);line-height:1.5;padding-left:14px;position:relative;"><span style="position:absolute;left:0;color:var(--teal);font-weight:700;">›</span>Não expor equipamentos sem treinamento — consultores perdem credibilidade com o cliente</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="row mb" style="gap:14px;">
+
+    <!-- Logística & Materiais -->
+    <div style="flex:1;min-width:0;background:#fff;border-radius:12px;padding:18px 18px;box-shadow:0 2px 14px rgba(31,44,78,0.07);">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+        <div style="width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,#1F2C4E,#326A84);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <span style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:11px;color:var(--navy);text-transform:uppercase;letter-spacing:0.8px;">Logística &amp; Materiais</span>
+      </div>
+      <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:7px;">
+        <li style="font-size:11px;color:var(--navy);line-height:1.5;padding-left:14px;position:relative;"><span style="position:absolute;left:0;color:var(--navy);font-weight:700;">›</span>Cases sem responsável definido — criar controle de custódia. Impacta a Hospitalar e outras demandas</li>
+        <li style="font-size:11px;color:var(--navy);line-height:1.5;padding-left:14px;position:relative;"><span style="position:absolute;left:0;color:var(--navy);font-weight:700;">›</span>Manter separação por cores nas cases e caixas — identificação precisa ser mais visível</li>
+        <li style="font-size:11px;color:var(--navy);line-height:1.5;padding-left:14px;position:relative;"><span style="position:absolute;left:0;color:var(--navy);font-weight:700;">›</span>Levar carrinho de apoio da logística (ou comprar um para a CMSP)</li>
+        <li style="font-size:11px;color:var(--navy);line-height:1.5;padding-left:14px;position:relative;"><span style="position:absolute;left:0;color:var(--navy);font-weight:700;">›</span>Materiais de escritório e MKT separados com antecedência; alinhar destino filial antes (SP ou RJ)</li>
+        <li style="font-size:11px;color:var(--navy);line-height:1.5;padding-left:14px;position:relative;"><span style="position:absolute;left:0;color:var(--navy);font-weight:700;">›</span>Comprar impressora laser exclusiva para eventos — foi um dos pontos mais citados na pesquisa</li>
+      </ul>
+    </div>
+
+    <!-- Backoffice & Operações -->
+    <div style="flex:1;min-width:0;background:#fff;border-radius:12px;padding:18px 18px;box-shadow:0 2px 14px rgba(31,44,78,0.07);">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+        <div style="width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,#36a57a,#2eaa5e);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
+        <span style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:11px;color:var(--green);text-transform:uppercase;letter-spacing:0.8px;">Backoffice &amp; Operações</span>
+      </div>
+      <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:7px;">
+        <li style="font-size:11px;color:var(--navy);line-height:1.5;padding-left:14px;position:relative;"><span style="position:absolute;left:0;color:var(--green);font-weight:700;">›</span>Levar 2 pessoas de backoffice — 1 para cobrir o início do processo e 1 para o fim, sem gargalo</li>
+        <li style="font-size:11px;color:var(--navy);line-height:1.5;padding-left:14px;position:relative;"><span style="position:absolute;left:0;color:var(--green);font-weight:700;">›</span>Emissão de contratos feita por quem está na feira — cliente decide na hora e não pode esperar</li>
+        <li style="font-size:11px;color:var(--navy);line-height:1.5;padding-left:14px;position:relative;"><span style="position:absolute;left:0;color:var(--green);font-weight:700;">›</span>Manter Cássia integrada ao backoffice para padronização do Salesforce com o MKT</li>
+        <li style="font-size:11px;color:var(--navy);line-height:1.5;padding-left:14px;position:relative;"><span style="position:absolute;left:0;color:var(--green);font-weight:700;">›</span>Criar cartão de crédito MKT exclusivo para a feira — centralizar todas as despesas e facilitar controle</li>
+        <li style="font-size:11px;color:var(--navy);line-height:1.5;padding-left:14px;position:relative;"><span style="position:absolute;left:0;color:var(--green);font-weight:700;">›</span>Conscientizar Confiantes sem atribuição direta para não ocupar mesas dos clientes no stand</li>
+      </ul>
+    </div>
+
+    <!-- Desmontagem & Retorno -->
+    <div style="flex:1;min-width:0;background:#fff;border-radius:12px;padding:18px 18px;box-shadow:0 2px 14px rgba(31,44,78,0.07);">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+        <div style="width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,#FFA300,#e07a00);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/></svg>
+        </div>
+        <span style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:11px;color:var(--orange);text-transform:uppercase;letter-spacing:0.8px;">Desmontagem &amp; Retorno</span>
+      </div>
+      <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:7px;">
+        <li style="font-size:11px;color:var(--navy);line-height:1.5;padding-left:14px;position:relative;"><span style="position:absolute;left:0;color:var(--orange);font-weight:700;">›</span>Levar caixas extras, durex, papel e caneta — itens básicos que faltam na desmontagem</li>
+        <li style="font-size:11px;color:var(--navy);line-height:1.5;padding-left:14px;position:relative;"><span style="position:absolute;left:0;color:var(--orange);font-weight:700;">›</span>Definir antes: kits do MKT vão para SP ou RJ? Evitar decisão de última hora</li>
+        <li style="font-size:11px;color:var(--navy);line-height:1.5;padding-left:14px;position:relative;"><span style="position:absolute;left:0;color:var(--orange);font-weight:700;">›</span>Marilia e Camille ficam até o final da desmontagem</li>
+        <li style="font-size:11px;color:var(--navy);line-height:1.5;padding-left:14px;position:relative;"><span style="position:absolute;left:0;color:var(--orange);font-weight:700;">›</span>Definir local específico na CMSP para receber equipamentos — Marilia precisa dar entrada no sistema</li>
+        <li style="font-size:11px;color:var(--navy);line-height:1.5;padding-left:14px;position:relative;"><span style="position:absolute;left:0;color:var(--orange);font-weight:700;">›</span>Verificar regras de estacionamento/docas com antecedência — proibido entrar antes das 20h</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- DESTAQUE FINAL: CONTRATO 2027 -->
+  <div style="background:linear-gradient(90deg,#1F2C4E,#326A84);border-radius:12px;padding:18px 28px;margin-top:4px;display:flex;align-items:center;justify-content:space-between;gap:16px;">
+    <div style="display:flex;align-items:center;gap:16px;">
+      <div style="width:48px;height:48px;border-radius:10px;background:var(--orange);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="15" x2="15" y2="15"/><line x1="9" y1="11" x2="15" y2="11"/></svg>
+      </div>
+      <div>
+        <div style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:20px;color:#FFA300;letter-spacing:0.5px;">CONTRATO ASSINADO PARA 2027!</div>
+        <div style="font-family:'Montserrat',sans-serif;font-weight:600;font-size:12px;color:rgba(255,255,255,0.75);margin-top:3px;letter-spacing:0.5px;">Hospitalar 2027 · 18 a 21 de maio de 2027</div>
+      </div>
+    </div>
+    <div style="font-family:'Montserrat',sans-serif;font-weight:700;font-size:11px;color:var(--cyan);text-transform:uppercase;letter-spacing:1.5px;white-space:nowrap;">#PorUmMundoSemCicatriz</div>
+  </div>
+
+</main>
+
+<!-- ══════ FOOTER ══════ -->
+<footer>
+  <span class="f-brand">Confiance Medical · Marketing</span>
+  <span class="f-date">Dashboard gerado em 25 de maio de 2026</span>
+  <span class="f-tag">#PorUmMundoSemCicatriz</span>
+</footer>
+
+</body>
+</html>
